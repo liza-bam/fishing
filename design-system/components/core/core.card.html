@@ -1,0 +1,81 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Core — Buttons, Tags, Badges" subtitle="Actions and labels: Button, IconButton, Tag, Badge" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; background: var(--surface-card); font-family: var(--font-sans); padding: 28px 30px; }
+  .group { margin-bottom: 26px; }
+  .lbl { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .dark { background: var(--surface-deep); border-radius: var(--radius-md); padding: 20px 22px; }
+  .icn { width: 17px; height: 17px; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { Button, IconButton, Tag, Badge } = window.BelugaGalapagosDesignSystem_fd3494;
+    const Ic = ({ n, c }) => <i data-lucide={n} className="icn" style={c ? { color: c } : null}></i>;
+
+    function Demo() {
+      return (
+        <div>
+          <div className="group">
+            <div className="lbl">Button — variants &amp; sizes</div>
+            <div className="row">
+              <Button variant="primary" size="lg">Book now</Button>
+              <Button variant="primary">Book now</Button>
+              <Button variant="primary" size="sm">Book</Button>
+              <Button variant="secondary">View charters</Button>
+              <Button variant="ghost" iconRight={<Ic n="arrow-right" />}>Read more</Button>
+              <Button variant="primary" disabled>Fully booked</Button>
+            </div>
+          </div>
+
+          <div className="group">
+            <div className="lbl">On photography — light &amp; glass</div>
+            <div className="row dark">
+              <Button variant="light" iconRight={<Ic n="arrow-right" />}>Watch the action</Button>
+              <Button variant="primary">Book a charter</Button>
+              <IconButton variant="glass" label="Previous" icon={<Ic n="arrow-left" />} />
+              <IconButton variant="glass" label="Next" icon={<Ic n="arrow-right" />} />
+              <IconButton variant="glass" label="Play" icon={<Ic n="play" />} />
+            </div>
+          </div>
+
+          <div className="group">
+            <div className="lbl">IconButton</div>
+            <div className="row">
+              <IconButton variant="solid" label="Menu" icon={<Ic n="menu" />} />
+              <IconButton variant="outline" label="Share" icon={<Ic n="share-2" />} />
+              <IconButton variant="outline" size="sm" label="Heart" icon={<Ic n="heart" />} />
+            </div>
+          </div>
+
+          <div className="group" style={{ marginBottom: 0 }}>
+            <div className="lbl">Tag &amp; Badge</div>
+            <div className="row">
+              <Tag variant="sand" iconLeft={<Ic n="clock" />}>Full day</Tag>
+              <Tag variant="outline">Catch &amp; release</Tag>
+              <Tag variant="coral">Few dates left</Tag>
+              <Tag variant="deep">Marlin season</Tag>
+              <span style={{ width: 1, height: 22, background: 'var(--hairline)' }}></span>
+              <Badge>Offshore charter</Badge>
+              <Badge tone="coral">Catch &amp; release</Badge>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+    requestAnimationFrame(() => window.lucide && window.lucide.createIcons());
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Logo" subtitle="The marlin badge — navy on light, reversed on deep navy" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-sans); display: grid; grid-template-columns: 1fr 1fr; }
+  .cell { display: flex; align-items: center; gap: 22px; padding: 30px 34px; min-height: 200px; }
+  .light { background: var(--surface-card); }
+  .deep { background: var(--surface-deep); }
+  .badge { height: 132px; width: auto; flex: none; }
+  .lock { line-height: 1; }
+  .word { font-family: var(--font-display); font-weight: 600; letter-spacing: .12em; font-size: 26px; color: var(--text-strong); }
+  .sub  { font-family: var(--font-sans); font-weight: 700; letter-spacing: .34em; font-size: 10px; text-transform: uppercase; color: var(--brand-secondary); margin-top: 8px; }
+  .deep .word { color: #fff; }
+  .deep .sub { color: var(--c-surf); }
+</style>
+</head>
+<body>
+  <div class="cell light">
+    <img class="badge" src="../assets/sportfish-logo-navy.png" alt="San Cristóbal Galápagos marlin badge" />
+    <div class="lock"><div class="word">SPORTFISH</div><div class="sub">Galápagos</div></div>
+  </div>
+  <div class="cell deep">
+    <img class="badge" src="../assets/sportfish-logo-white.png" alt="San Cristóbal Galápagos marlin badge, reversed" />
+    <div class="lock"><div class="word">SPORTFISH</div><div class="sub">Galápagos</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- @dsCard group="Spacing" viewport="700x230" name="Scrims & Image Treatment" subtitle="Bottom-up scrim keeps text legible over photography" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body { margin: 0; background: var(--surface-card); font-family: var(--font-sans); padding: 20px; }
+  .row { display: flex; gap: 16px; }
+  .frame { position: relative; flex: 1; height: 184px; border-radius: var(--radius-md); overflow: hidden; background-size: cover; background-position: center; }
+  .scrim { position: absolute; inset: 0; }
+  .cap { position: absolute; left: 16px; bottom: 14px; color: #fff; }
+  .eb { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; opacity:.85; }
+  .ti { font-family: var(--font-display); font-size: 24px; font-weight: 500; line-height: 1.1; }
+  .tag { position:absolute; top:14px; left:14px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color: var(--c-deep-sea-900); background: rgba(255,255,255,.92); padding:5px 10px; border-radius: var(--radius-pill); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="frame" style="background-image:url('https://images.weserv.nl/?url=sportfishgalapagos.com/wp-content/uploads/2024/04/gallery-image-01-1024x617.jpg')">
+      <div class="scrim" style="background:var(--scrim-bottom)"></div>
+      <div class="cap"><div class="eb">scrim-bottom</div><div class="ti">Legible caption</div></div>
+    </div>
+    <div class="frame" style="background-image:url('https://images.weserv.nl/?url=sportfishgalapagos.com/wp-content/uploads/2024/04/gallery-image-08-1024x685.jpg')">
+      <div class="scrim" style="background:var(--scrim-full)"></div>
+      <div class="tag">scrim-full + capsule</div>
+    </div>
+  </div>
+</body>
+</html>
