@@ -43,7 +43,8 @@ body{ overflow-x:hidden; }
 .nav.is-solid{ background:var(--c-deep-sea); box-shadow:var(--shadow-md); }
 .nav.is-solid::before{ opacity:0; }
 .nav__row{ display:flex; align-items:center; gap:var(--space-6); width:100%; position:relative; z-index:1; }
-.nav__logo{ height:48px; width:auto; display:block; }
+.nav__logo{ height:72px; width:auto; display:block; }
+@media (max-width:520px){ .nav__logo{ height:56px; } }
 .nav__spacer{ flex:1; }
 .nav__links{ display:flex; gap:var(--space-6); align-items:center; }
 .nav__link{ font-family:var(--font-sans); font-size:var(--text-body-sm); font-weight:800;
