@@ -37,11 +37,10 @@ body{ overflow-x:hidden; }
 
 /* ---- Nav ------------------------------------------------- */
 .nav{ position:fixed; inset:0 0 auto 0; z-index:var(--z-sticky); height:var(--nav-h);
-  display:flex; align-items:center; transition:background var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
-.nav::before{ content:""; position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(180deg, rgba(8,18,40,0.55), rgba(8,18,40,0)); opacity:1; transition:opacity var(--dur-base); }
+  display:flex; align-items:center; background:var(--c-deep-sea); box-shadow:var(--shadow-md);
+  transition:background var(--dur-base) var(--ease-out); }
+.nav::before{ content:none; }
 .nav.is-solid{ background:var(--c-deep-sea); box-shadow:var(--shadow-md); }
-.nav.is-solid::before{ opacity:0; }
 .nav__row{ display:flex; align-items:center; gap:var(--space-6); width:100%; position:relative; z-index:1; }
 .nav__logo{ height:72px; width:auto; display:block; }
 @media (max-width:520px){ .nav__logo{ height:56px; } }

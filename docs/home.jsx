@@ -98,7 +98,6 @@ function Hero({ onEnquire }) {
       <img className="hero__img" src="uploads/test.jpg" alt="Clear water over a coral reef beneath a palm-fringed Galápagos shoreline" />
       <div className="hero__scrim"></div>
       <div className="container hero__inner">
-        <p className="eyebrow eyebrow--ondark">Galápagos · San Cristóbal · Est. 2004</p>
         <h1 className="hero__title" style={{ fontWeight: "900", fontSize: "82px" }}>Galápagos offshore fishing charters</h1>
         <p className="hero__lead">
           Catch some of the world’s largest fish on your private charter with Sportfish Galápagos.
