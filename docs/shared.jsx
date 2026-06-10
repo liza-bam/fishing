@@ -61,7 +61,7 @@ function MobileMenu({ open, onClose, onEnquire }) {
   return (
     <div className={"mobilemenu" + (open ? " is-open" : "")} aria-hidden={!open}>
       <div className="mobilemenu__top">
-        <img className="nav__logo" src={LOGO_WHITE} alt="Sportfish Galápagos" />
+        <a href="index.html" aria-label="Sportfish Galápagos — home" onClick={onClose}><img className="nav__logo" src={LOGO_WHITE} alt="Sportfish Galápagos" /></a>
         <button className="iconbtn-plain" aria-label="Close menu" onClick={onClose}><Ic n="x" /></button>
       </div>
       <nav className="mobilemenu__links">
