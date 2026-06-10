@@ -42,7 +42,7 @@ body{ overflow-x:hidden; }
   background:linear-gradient(180deg, rgba(8,18,40,0.55), rgba(8,18,40,0)); opacity:1; transition:opacity var(--dur-base); }
 .nav.is-solid{ background:var(--c-deep-sea); box-shadow:var(--shadow-md); }
 .nav.is-solid::before{ opacity:0; }
-.nav__row{ display:flex; align-items:center; gap:var(--space-6); width:100%; }
+.nav__row{ display:flex; align-items:center; gap:var(--space-6); width:100%; position:relative; z-index:1; }
 .nav__logo{ height:42px; width:auto; display:block; }
 .nav__spacer{ flex:1; }
 .nav__links{ display:flex; gap:var(--space-6); align-items:center; }
