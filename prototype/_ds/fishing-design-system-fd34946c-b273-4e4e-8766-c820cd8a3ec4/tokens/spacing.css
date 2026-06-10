@@ -1,0 +1,49 @@
+/* ============================================================
+   Sportfish Galápagos — Spacing, radii, layout
+   8px base rhythm. Generous, airy spacing for editorial layouts.
+   ============================================================ */
+:root {
+  /* ---- Spacing scale (8px base) ---------------------------- */
+  --space-0:   0;
+  --space-1:   0.25rem;   /* 4  */
+  --space-2:   0.5rem;    /* 8  */
+  --space-3:   0.75rem;   /* 12 */
+  --space-4:   1rem;      /* 16 */
+  --space-5:   1.5rem;    /* 24 */
+  --space-6:   2rem;      /* 32 */
+  --space-7:   2.5rem;    /* 40 */
+  --space-8:   3rem;      /* 48 */
+  --space-9:   4rem;      /* 64 */
+  --space-10:  5rem;      /* 80 */
+  --space-11:  6rem;      /* 96 */
+  --space-12:  8rem;      /* 128 */
+
+  /* ---- Section rhythm -------------------------------------- */
+  --section-y:        clamp(4rem, 8vw, 8rem);       /* @kind spacing */
+  --section-y-tight:  clamp(2.5rem, 5vw, 4.5rem);   /* @kind spacing */
+
+  /* ---- Radii (restrained — image-forward, minimal) --------- */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-pill: 999px;
+
+  /* ---- Borders --------------------------------------------- */
+  --border-width:      2px;
+  --border-width-thick: 2px;
+
+  /* ---- Layout containers ----------------------------------- */
+  --container-narrow: 44rem;   /* long-form prose ~704px */
+  --container-text:   58rem;   /* ~928px */
+  --container-wide:   76rem;   /* ~1216px */
+  --container-full:   90rem;   /* ~1440px */
+  --gutter:           clamp(1.25rem, 4vw, 4rem);   /* @kind spacing */
+
+  /* ---- Z-index --------------------------------------------- */
+  --z-base:    0;     /* @kind other */
+  --z-raised:  10;    /* @kind other */
+  --z-sticky:  100;   /* @kind other */
+  --z-overlay: 1000;  /* @kind other */
+  --z-modal:   1100;  /* @kind other */
+  --z-toast:   1200;  /* @kind other */
+}

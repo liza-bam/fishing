@@ -1,0 +1,82 @@
+/* ============================================================
+   Sportfish Galápagos — Color tokens
+   A nautical palette anchored on the brand navy (from the logo),
+   open-water blues, warm shell & sand neutrals, and a single
+   coral accent for action and energy.
+   ============================================================ */
+:root {
+  /* ---- Base palette ---------------------------------------- */
+  --c-ink:           #14181F;  /* near-black, cool */
+  --c-white:         #FFFFFF;
+
+  /* Ocean / brand navy */
+  --c-deep-sea:      #1A2C5B;  /* primary brand — logo navy */
+  --c-deep-sea-700:  #132445;  /* pressed / darker */
+  --c-deep-sea-900:  #0C1730;  /* darkest surface */
+  --c-lagoon:        #2D6E9E;  /* secondary — open water blue */
+  --c-lagoon-400:    #5193C0;  /* lighter water */
+  --c-surf:          #C5DCEC;  /* pale sky-blue */
+  --c-mist:          #E6EEF5;  /* faintest blue wash */
+
+  /* Land / warmth */
+  --c-shell:         #F7F2E9;  /* cream page surface */
+  --c-sand:          #E7DCC8;  /* sand panel */
+  --c-sand-deep:     #D8C9AE;  /* deeper sand / border on cream */
+  --c-coral:         #CB6843;  /* warm accent — sunrise, the catch */
+  --c-coral-600:     #B5572F;  /* coral pressed */
+  --c-coral-100:     #F3DFD3;  /* coral tint surface */
+
+  /* ---- Warm neutral scale ---------------------------------- */
+  --c-neutral-950:   #101817;
+  --c-neutral-900:   #1B2624;
+  --c-neutral-800:   #283431;
+  --c-neutral-700:   #3C4845;
+  --c-neutral-600:   #54615D;
+  --c-neutral-500:   #6E7B77;
+  --c-neutral-400:   #93A09B;
+  --c-neutral-300:   #BAC4BF;
+  --c-neutral-200:   #DCE2DD;
+  --c-neutral-100:   #ECEFEA;
+  --c-neutral-50:    #F5F6F2;
+
+  /* ---- Semantic: surfaces ---------------------------------- */
+  --surface-page:        var(--c-shell);
+  --surface-page-alt:    var(--c-mist);
+  --surface-card:        var(--c-white);
+  --surface-sand:        var(--c-sand);
+  --surface-deep:        var(--c-deep-sea);
+  --surface-deepest:     var(--c-deep-sea-900);
+  --surface-overlay:     rgba(6, 38, 43, 0.55); /* over imagery */
+
+  /* ---- Semantic: text -------------------------------------- */
+  --text-strong:         var(--c-ink);
+  --text-body:           #2C3A37;
+  --text-muted:          #61706C;
+  --text-faint:          #8A9793;
+  --text-on-dark:        rgba(255, 255, 255, 0.88);
+  --text-on-dark-muted:  rgba(231, 240, 238, 0.72);
+  --text-on-dark-faint:  rgba(255, 255, 255, 0.68);   /* placeholder on dark */
+  --text-link:           var(--c-deep-sea);
+  --text-link-hover:     var(--c-coral-600);
+
+  /* ---- Semantic: brand & action ---------------------------- */
+  --brand-primary:       var(--c-deep-sea);
+  --brand-secondary:     var(--c-lagoon);
+  --brand-accent:        var(--c-coral);
+  --action-bg:           var(--c-coral);
+  --action-bg-hover:     var(--c-coral-600);
+  --action-fg:           var(--c-white);
+
+  /* ---- Borders & lines ------------------------------------- */
+  --border-subtle:       rgba(22, 32, 30, 0.10);
+  --border-default:      rgba(22, 32, 30, 0.16);
+  --border-strong:       rgba(22, 32, 30, 0.32);
+  --border-on-dark:      rgba(255, 255, 255, 0.5);
+  --hairline:            rgba(22, 32, 30, 0.08);
+
+  /* ---- Status (kept muted, used sparingly) ----------------- */
+  --status-success:      #3E8F6B;
+  --status-warning:      #C9952F;
+  --status-danger:       #B14B3A;
+  --status-info:         var(--c-lagoon);
+}

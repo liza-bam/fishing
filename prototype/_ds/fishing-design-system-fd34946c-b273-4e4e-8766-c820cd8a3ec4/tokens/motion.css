@@ -1,0 +1,57 @@
+/* ============================================================
+   Sportfish Galápagos — Microinteractions
+   Small, restrained hover motion. Add a class; the SVG/icon
+   inside responds. All motion is disabled under
+   prefers-reduced-motion.
+   ============================================================ */
+
+/* Trailing arrow that nudges right on hover of its container.
+   Put .bx-nudge on the button/link; wrap the trailing icon in
+   .bx-nudge__x (or just give the icon that class). */
+.bx-nudge__x {
+  display: inline-flex;
+  transition: transform var(--dur-base) var(--ease-out);
+  will-change: transform;
+}
+.bx-nudge:hover .bx-nudge__x,
+.bx-nudge:focus-visible .bx-nudge__x {
+  transform: translateX(3px);
+}
+
+/* Leading arrow that nudges left (e.g. "back"). */
+.bx-nudge:hover .bx-nudge__x--back,
+.bx-nudge:focus-visible .bx-nudge__x--back {
+  transform: translateX(-3px);
+}
+
+/* Icon-button glyph: a gentle lift already handled by scale in JS;
+   this adds a hairline travel for directional glyphs. */
+.bx-press {
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.bx-press:active {
+  transform: scale(0.96);
+}
+
+/* Underline that wipes in from the left on hover — for text links. */
+.bx-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size var(--dur-base) var(--ease-out);
+  padding-bottom: 2px;
+}
+.bx-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bx-nudge__x,
+  .bx-press,
+  .bx-underline { transition: none; }
+  .bx-nudge:hover .bx-nudge__x,
+  .bx-nudge:focus-visible .bx-nudge__x,
+  .bx-nudge:hover .bx-nudge__x--back,
+  .bx-nudge:focus-visible .bx-nudge__x--back { transform: none; }
+}

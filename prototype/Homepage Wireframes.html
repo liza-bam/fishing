@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sportfish Galápagos — Homepage Wireframes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3f0e9;
+    --paper-2:#ebe7dd;
+    --ink:#26241f;
+    --ink-soft:#8d877c;
+    --ink-faint:#b9b2a4;
+    --line:#c7c0b1;
+    --line-strong:#7d766a;
+    --accent:#cf5f3b;     /* coral CTA */
+    --accent-ink:#fff;
+    --navy:#13212c;       /* cinematic dark */
+    --sand:#e4dcc9;       /* expedition panel */
+    --sand-deep:#d6cab0;
+    --ok:#3f7d63;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(125,118,106,.045) 31px, rgba(125,118,106,.045) 32px),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Jost',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- top toolbar ---------- */
+  .bar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    padding:12px 20px;
+    background:rgba(243,240,233,.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1.5px solid var(--line-strong);
+  }
+  .bar h1{
+    font-family:'Caveat',cursive;font-weight:700;
+    font-size:24px;margin:0;letter-spacing:.3px;line-height:1;
+  }
+  .bar h1 small{display:block;font-family:'Jost';font-weight:400;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;}
+  .seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:0;overflow:hidden;}
+  .seg button{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    font-family:'Jost';font-weight:500;font-size:13px;letter-spacing:.04em;
+    padding:9px 14px;color:var(--ink);border-right:1.5px solid var(--ink);white-space:nowrap;
+  }
+  .seg button:last-child{border-right:0;}
+  .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);}
+  .seg.accent button[aria-pressed="true"]{background:var(--accent);color:#fff;}
+  .bar .spacer{flex:1;}
+  .legend-btn{
+    appearance:none;cursor:pointer;background:transparent;border:1.5px dashed var(--line-strong);
+    font-family:'Caveat';font-size:18px;font-weight:600;color:var(--ink);padding:5px 14px;
+  }
+  .tablabel{font-family:'Caveat';font-size:17px;color:var(--ink-soft);font-weight:600;}
+
+  /* ---------- canvas ---------- */
+  .canvas{padding:34px clamp(16px,4vw,56px) 120px;}
+  .stage{display:flex;gap:48px;align-items:flex-start;justify-content:center;flex-wrap:wrap;}
+  .col-title{
+    font-family:'Caveat';font-weight:700;font-size:22px;margin:0 0 12px 4px;color:var(--ink);
+    display:flex;align-items:center;gap:8px;
+  }
+  .col-title .dot{width:9px;height:9px;background:var(--accent);border-radius:50%;}
+
+  /* device frames */
+  .frame{background:var(--paper);border:2px solid var(--ink);box-shadow:6px 8px 0 rgba(38,36,31,.12);}
+  .frame.desktop{width:1040px;max-width:100%;}
+  .frame .chrome{display:flex;align-items:center;gap:7px;padding:9px 12px;border-bottom:1.5px solid var(--line);background:var(--paper-2);}
+  .frame .chrome i{width:11px;height:11px;border:1.5px solid var(--line-strong);border-radius:50%;display:block;}
+  .frame .chrome .url{flex:1;margin-left:8px;height:18px;border:1.5px solid var(--line);background:var(--paper);border-radius:9px;
+    font-size:11px;color:var(--ink-faint);display:flex;align-items:center;padding:0 10px;font-family:'Jost';letter-spacing:.04em;}
+  .frame.mobile{width:380px;max-width:100%;border-radius:30px;padding:10px;background:var(--ink);}
+  .frame.mobile .screen{background:var(--paper);border-radius:20px;overflow:hidden;border:1.5px solid #000;}
+  .frame.mobile .notch{height:22px;display:flex;justify-content:center;}
+  .frame.mobile .notch::after{content:"";width:120px;height:7px;background:#000;border-radius:0 0 10px 10px;}
+
+  .scroll{overflow:hidden;}
+
+  /* ---------- wireframe primitives ---------- */
+  .ph{
+    position:relative;background:var(--paper-2);
+    background-image:
+      linear-gradient(to top right, transparent calc(50% - .8px), var(--line) calc(50% - .8px), var(--line) calc(50% + .8px), transparent calc(50% + .8px)),
+      linear-gradient(to top left, transparent calc(50% - .8px), var(--line) calc(50% - .8px), var(--line) calc(50% + .8px), transparent calc(50% + .8px));
+    border:1.5px solid var(--line);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    overflow:hidden;
+  }
+  .ph .lbl{
+    position:relative;background:var(--paper);border:1.5px solid var(--line);
+    font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);
+    padding:5px 9px;max-width:80%;line-height:1.35;font-weight:500;
+  }
+  .ph.dark{background:#1c2c38;background-blend-mode:normal;border-color:#324655;}
+  .ph.dark{background-image:
+      linear-gradient(to top right, transparent calc(50% - .8px), #2c3f4e calc(50% - .8px), #2c3f4e calc(50% + .8px), transparent calc(50% + .8px)),
+      linear-gradient(to top left, transparent calc(50% - .8px), #2c3f4e calc(50% - .8px), #2c3f4e calc(50% + .8px), transparent calc(50% + .8px));}
+  .ph.dark .lbl{background:#16242e;border-color:#324655;color:#9fb1bd;}
+
+  .tl{height:11px;background:var(--line);border-radius:2px;margin:7px 0;}
+  .tl.sm{height:8px;opacity:.8;}
+  .tl.ink{background:var(--line-strong);}
+  .tl.light{background:rgba(255,255,255,.45);}
+
+  .h{font-family:'Jost';font-weight:600;line-height:1.05;letter-spacing:-.01em;color:var(--ink);}
+  .serif{font-family:'Caveat';font-weight:700;letter-spacing:.5px;}
+  .eyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .eyebrow.soft{color:var(--ink-soft);}
+
+  .btn{display:inline-flex;align-items:center;gap:7px;font-family:'Jost';font-weight:600;font-size:13px;
+    letter-spacing:.14em;text-transform:uppercase;padding:13px 22px;border:1.5px solid var(--accent);
+    background:var(--accent);color:#fff;cursor:default;}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn.ghost.light{color:#fff;border-color:rgba(255,255,255,.85);}
+  .btn.wa{background:transparent;border-color:var(--ok);color:var(--ok);}
+
+  .chip{display:inline-flex;align-items:center;font-size:11px;letter-spacing:.08em;padding:5px 11px;
+    border:1.5px solid var(--line-strong);color:var(--ink-soft);text-transform:uppercase;font-weight:500;border-radius:40px;}
+
+  /* nav */
+  .nav{display:flex;align-items:center;gap:22px;padding:16px 28px;}
+  .logo{font-family:'Caveat';font-weight:700;font-size:21px;line-height:1;}
+  .navitems{display:flex;gap:18px;flex:1;}
+  .navitems span{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:500;}
+  .burger{display:flex;flex-direction:column;gap:4px;}
+  .burger b{width:24px;height:2px;background:currentColor;display:block;}
+
+  /* proof bar */
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);}
+  .proof .cell{padding:26px 18px 22px;text-align:center;}
+  .proof .num{font-family:'Caveat';font-weight:700;font-size:34px;line-height:1.15;color:var(--ink);}
+  .proof .cap{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px;line-height:1.4;}
+  .proof.placeholder .num{color:var(--accent);}
+  .estimate{border-bottom:1.5px dashed var(--accent);}
+
+  /* annotations */
+  .note{position:relative;font-family:'Caveat';font-weight:600;font-size:16px;color:var(--accent);
+    line-height:1.2;max-width:190px;}
+  .ann{display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+  .ann .pin{font-family:'Caveat';font-weight:700;color:#fff;background:var(--accent);width:22px;height:22px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 auto;}
+  .ann .txt{font-family:'Caveat';font-weight:600;font-size:15.5px;color:var(--ink);line-height:1.25;}
+
+  .sidecol{width:230px;flex:0 0 auto;}
+  @media(max-width:1500px){.sidecol{display:none;}}
+
+  section.wf{padding:0;}
+  .pad{padding:38px 40px;}
+  .pad-lg{padding:56px 44px;}
+  .center{text-align:center;}
+  .muted{color:var(--ink-soft);}
+
+  /* legend / sitemap drawer */
+  .drawer{position:fixed;inset:0;z-index:80;display:none;}
+  .drawer.open{display:block;}
+  .drawer .scrim{position:absolute;inset:0;background:rgba(20,18,15,.4);}
+  .drawer .panel{position:absolute;right:0;top:0;height:100%;width:min(440px,92vw);background:var(--paper);
+    border-left:2px solid var(--ink);padding:26px 26px 60px;overflow:auto;box-shadow:-10px 0 0 rgba(38,36,31,.08);}
+  .drawer h2{font-family:'Caveat';font-size:30px;margin:0 0 4px;}
+  .drawer .close{position:absolute;top:18px;right:20px;cursor:pointer;font-size:24px;background:none;border:none;font-family:'Caveat';}
+  .smap{list-style:none;padding:0;margin:18px 0;counter-reset:s;}
+  .smap>li{border-top:1.5px solid var(--line);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .smap>li .n{font-family:'Caveat';font-weight:700;font-size:22px;color:var(--accent);width:26px;flex:0 0 auto;}
+  .smap>li .t{font-weight:600;font-size:16px;letter-spacing:.02em;}
+  .smap>li .d{font-size:13px;color:var(--ink-soft);margin-top:3px;line-height:1.45;}
+  .smap>li .was{font-size:11px;color:var(--ink-faint);margin-top:6px;letter-spacing:.04em;}
+  .keybox{border:1.5px dashed var(--line-strong);padding:14px 16px;margin-top:20px;}
+  .keybox h3{font-family:'Caveat';font-size:20px;margin:0 0 8px;}
+  .keyrow{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-soft);margin:7px 0;}
+  .keyrow .sw{width:26px;height:16px;border:1.5px solid var(--line-strong);flex:0 0 auto;}
+
+  .hide{display:none!important;}
+  .footwrap{margin-top:26px;text-align:center;font-family:'Caveat';font-size:16px;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <h1>Sportfish Galápagos<small>Homepage Wireframes · Lo-Fi</small></h1>
+  <div class="spacer"></div>
+  <span class="tablabel">Direction</span>
+  <div class="seg accent" id="dirseg" role="tablist" aria-label="Wireframe direction">
+    <button data-dir="aplus" aria-pressed="true">A+ · Recommended</button>
+    <button data-dir="a" aria-pressed="false">A · Cinematic</button>
+    <button data-dir="b" aria-pressed="false">B · Editorial</button>
+    <button data-dir="c" aria-pressed="false">C · Expedition</button>
+  </div>
+  <span class="tablabel">View</span>
+  <div class="seg" id="viewseg" aria-label="Viewport">
+    <button data-view="both" aria-pressed="true">Both</button>
+    <button data-view="desktop" aria-pressed="false">Desktop</button>
+    <button data-view="mobile" aria-pressed="false">Mobile</button>
+  </div>
+  <button class="legend-btn" id="legendBtn">Sitemap & notes ↗</button>
+</div>
+
+<div class="canvas">
+  <div class="stage" id="stage"></div>
+  <div class="footwrap">Rough wireframes — boxes are photo slots, bars are text. Switch directions above. Coral = primary action.</div>
+</div>
+
+<!-- sitemap drawer -->
+<div class="drawer" id="drawer">
+  <div class="scrim" data-close></div>
+  <div class="panel">
+    <button class="close" data-close>✕ close</button>
+    <h2>The sitemap</h2>
+    <p class="muted" style="font-size:13.5px;line-height:1.5;margin:2px 0 0;">13 scattered pages → <b>6 pages + a quick slide-over.</b> One identity: a premium owner-operated charter; stay, dine &amp; expeditions become the curated experience arranged <i>around the fishing.</i> Gallery keeps a menu item but anchors into The Fishing.</p>
+    <ol class="smap" id="smapList"></ol>
+    <div class="keybox">
+      <h3>Reading the sketches</h3>
+      <div class="keyrow"><span class="sw" style="background:var(--accent);border-color:var(--accent)"></span> Primary CTA — <b style="color:var(--ink)">Enquire</b></div>
+      <div class="keyrow"><span class="sw"></span> Photo slot (crossed box = real imagery, labelled)</div>
+      <div class="keyrow"><span class="sw" style="background:var(--line)"></span> Text / copy</div>
+      <div class="keyrow"><span class="estimate" style="font-family:'Caveat';color:var(--accent);font-weight:700">300+</span> &nbsp;dashed = number to confirm</div>
+    </div>
+    <div class="keybox">
+      <h3>Decisions baked in</h3>
+      <p class="muted" style="font-size:13px;line-height:1.55;margin:0;">Primary CTA = <b style="color:var(--ink)">Enquire</b>, WhatsApp as the warm secondary · Pricing = framing + “by inquiry” · ADA: large type, AA+ contrast, real H1→H2 order, labelled slots · English only.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================== wireframe kit =================== */
+const E=(t,c,txt)=>{const e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e;};
+const add=(p,...k)=>{k.forEach(x=>p.appendChild(x));return p;};
+function ph(label,h,opts={}){const d=E('div','ph'+(opts.dark?' dark':''));d.style.height=(typeof h==='number'?h+'px':h);if(opts.w)d.style.width=opts.w;if(opts.flex)d.style.flex=opts.flex;const l=E('div','lbl',label);d.appendChild(l);if(opts.style)Object.assign(d.style,opts.style);return d;}
+function tl(w,o={}){const d=E('div','tl'+(o.sm?' sm':'')+(o.ink?' ink':'')+(o.light?' light':''));d.style.width=(w||'100%');if(o.mt)d.style.marginTop=o.mt;return d;}
+function lines(n,widths,o={}){const w=E('div');for(let i=0;i<n;i++)w.appendChild(tl(widths?widths[i%widths.length]:(70+Math.random()*28)+'%',o));return w;}
+function h(txt,size,o={}){const d=E('div','h'+(o.serif?' serif':''),txt);d.style.fontSize=size+'px';if(o.color)d.style.color=o.color;if(o.mt)d.style.marginTop=o.mt;if(o.mb)d.style.marginBottom=o.mb;if(o.lh)d.style.lineHeight=o.lh;if(o.w)d.style.maxWidth=o.w;return d;}
+function eyebrow(t,o={}){const d=E('div','eyebrow'+(o.soft?' soft':''),t);if(o.light)d.style.color='rgba(255,255,255,.8)';if(o.mb)d.style.marginBottom=o.mb;return d;}
+function btn(t,kind){const d=E('div','btn'+(kind?' '+kind:''),t);return d;}
+function chip(t,o={}){const d=E('div','chip',t);if(o.light){d.style.color='rgba(255,255,255,.85)';d.style.borderColor='rgba(255,255,255,.5)';}return d;}
+function row(gap,o={}){const d=E('div');d.style.display='flex';d.style.gap=(gap||'12px');d.style.alignItems=o.align||'center';if(o.wrap)d.style.flexWrap='wrap';if(o.justify)d.style.justifyContent=o.justify;return d;}
+function grid(cols,gap){const d=E('div');d.style.display='grid';d.style.gridTemplateColumns=cols;d.style.gap=(gap||'16px');return d;}
+
+/* proof bar data */
+const PROOF=[
+  {num:'20+',cap:'Years in the islands',est:false},
+  {num:'300+',cap:'Marlin raised / season',est:true},
+  {num:'100%',cap:'Catch &amp; release',est:false},
+  {num:'3',cap:'Vessels · up to 16 guests',est:false},
+];
+function proofBar(theme){ // theme: light | dark | sand
+  const p=E('div','proof');
+  p.style.borderTop='1.5px solid '+(theme==='dark'?'#2c3f4e':'var(--line)');
+  PROOF.forEach((c,i)=>{
+    const cell=E('div','cell');
+    if(i)cell.style.borderLeft='1.5px solid '+(theme==='dark'?'#2c3f4e':'var(--line)');
+    const num=E('div','num','');num.innerHTML=c.num;
+    const cap=E('div','cap','');cap.innerHTML=c.cap;
+    if(theme==='dark'){num.style.color='#f0ece2';cap.style.color='#9fb1bd';}
+    if(c.est){num.classList.add('estimate');num.title='confirm number';}
+    add(cell,num,cap);p.appendChild(cell);
+  });
+  return p;
+}
+
+/* nav variants */
+function navBar(variant,theme){ // variant: overlay | full | mega
+  const dark=theme==='dark';
+  const n=E('div','nav');
+  if(theme==='sand')n.style.background='var(--sand)';
+  const logo=E('div','logo','Sportfish & Co.');
+  if(dark)logo.style.color='#f0ece2';
+  const items=E('div','navitems');
+  const labels = variant==='overlay' ? ['Menu'] : ['The Fishing','Gallery','The Fleet','The Experience','Our Story'];
+  if(variant==='mega')labels[0]='The Fishing ▾';
+  labels.forEach(t=>{const s=E('span',null,t);if(dark)s.style.color='rgba(240,236,226,.8)';items.appendChild(s);});
+  if(variant==='overlay'){items.style.flex='1';items.style.justifyContent='flex-end';items.style.marginRight='16px';}
+  const right=row('14px');
+  const cta=btn("Let’s go fishing");cta.style.padding='10px 18px';
+  if(variant==='overlay'){
+    const bg=E('div','burger');if(dark)bg.style.color='#f0ece2';for(let i=0;i<3;i++)bg.appendChild(E('b'));
+    add(n,logo,items,cta,bg);
+  }else{
+    add(n,logo,items,cta);
+  }
+  return n;
+}
+
+/* footer */
+function footer(){
+  const f=E('div');f.style.background='var(--navy)';f.style.color='#cdd6db';f.style.padding='40px';
+  const top=row('40px',{align:'flex-start',wrap:true});
+  const c1=E('div');c1.style.flex='1.4';
+  const lg=h('Sportfish & Co.',24,{serif:true,color:'#f0ece2'});
+  add(c1,lg,tl('80%',{light:true,mt:'14px'}),tl('60%',{light:true}));
+  const wa=btn('WhatsApp us','wa');wa.style.marginTop='14px';wa.style.borderColor='#5e9a7f';wa.style.color='#9ed3ba';c1.appendChild(wa);
+  ['Fishing & Fleet','Experience','Visit'].forEach(t=>{
+    const col=E('div');col.style.flex='1';
+    const head=eyebrow(t,{light:true});head.style.marginBottom='12px';col.appendChild(head);
+    for(let i=0;i<4;i++)col.appendChild(tl((50+Math.random()*30)+'%',{light:true}));
+    top.appendChild(col);
+  });
+  top.insertBefore(c1,top.firstChild);
+  f.appendChild(top);
+  const bottom=E('div');bottom.style.cssText='border-top:1.5px solid rgba(255,255,255,.15);margin-top:28px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;';
+  bottom.appendChild(tl('180px',{light:true}));bottom.appendChild(tl('120px',{light:true}));
+  f.appendChild(bottom);
+  return f;
+}
+
+function annStack(items){
+  const w=E('div');
+  items.forEach((t,i)=>{
+    const a=E('div','ann');
+    add(a,E('div','pin',(i+1)+''),E('div','txt',t));
+    w.appendChild(a);
+  });
+  return w;
+}
+
+/* =================== DIRECTION A — Cinematic / dark =================== */
+function deskA(){
+  const wrap=E('div','scroll');
+  // dark full-bleed hero
+  const hero=E('div');hero.style.cssText='position:relative;background:var(--navy);color:#fff;';
+  hero.appendChild(navBar('overlay','dark'));
+  const heroIn=E('div');heroIn.style.cssText='padding:70px 48px 40px;position:relative;';
+  const ph1=ph('FULL-BLEED HERO — striped marlin lit at golden hour, angler silhouetted',420,{dark:true});
+  ph1.style.position='absolute';ph1.style.inset='0';ph1.style.border='0';
+  ph1.style.alignItems='flex-end';ph1.style.justifyContent='flex-end';ph1.style.padding='16px';
+  hero.style.minHeight='0';
+  const heroContent=E('div');heroContent.style.cssText='position:relative;padding:64px 48px 44px;max-width:680px;';
+  add(heroContent,
+    eyebrow('Galápagos · Est. 2004',{light:true}),
+    h('Galápagos offshore fishing charters',54,{serif:true,color:'#fff',mt:'14px',lh:1.02,w:'620px'}),
+    (()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter with Sportfish Galápagos. Our experienced captains and crews provide the highest level of service and local knowledge to make your trip the best it can be. Whether it’s your first sportfishing adventure or you’re a seasoned pro, you’ve come to the right place.");p.style.cssText='max-width:480px;margin-top:16px;color:rgba(255,255,255,.82);font-size:15px;line-height:1.65;';return p;})(),
+    (()=>{const r=row('14px');r.style.marginTop='26px';add(r,btn("Let’s go fishing"),btn('The fishing','ghost light'));return r;})()
+  );
+  const heroBox=E('div');heroBox.style.position='relative';
+  add(heroBox,ph1,heroContent);
+  hero.appendChild(heroBox);
+  wrap.appendChild(hero);
+  // proof strip overlapping (dark)
+  const pf=E('div');pf.style.background='#16242e';proofBar('dark');pf.appendChild(proofBar('dark'));wrap.appendChild(pf);
+
+  // intro voice band (light)
+  const intro=E('div','pad-lg center');intro.style.maxWidth='760px';intro.style.margin='0 auto';
+  add(intro,eyebrow('Owner-operated · Captains Peter & Al'),
+    h('For nearly twenty years the same small crew has fished these waters, long enough to know the islands, the seasons and the fish the way only those who are out on them every day can.',24,{mt:'14px',lh:1.5,w:'780px'}));
+  intro.style.maxWidth='820px';wrap.appendChild(intro);
+
+  // species — full bleed alternating dark bands
+  const sp=E('div');
+  ['Striped Marlin','Yellowfin Tuna','Wahoo'].forEach((name,i)=>{
+    const band=E('div');band.style.display='grid';band.style.gridTemplateColumns=i%2?'1fr 1fr':'1fr 1fr';
+    const img=ph((i%2?'':'')+name+' — hero catch, full frame',300,{});
+    const txt=E('div','pad');txt.style.display='flex';txt.style.flexDirection='column';txt.style.justifyContent='center';
+    add(txt,eyebrow('The Fishing — 0'+(i+1)),h(name,34,{serif:true,mt:'8px'}),lines(2,['90%','64%'],{mt:'8px'}),
+      (()=>{const r=row('8px',{wrap:true});r.style.marginTop='14px';['150–250 lb','Year-round','Fly & conventional'].forEach(t=>r.appendChild(chip(t)));return r;})(),
+      (()=>{const b=btn('Read the species guide','ghost');b.style.marginTop='18px';b.style.alignSelf='flex-start';return b;})());
+    if(i%2){band.appendChild(txt);band.appendChild(img);}else{band.appendChild(img);band.appendChild(txt);}
+    sp.appendChild(band);
+  });
+  wrap.appendChild(sp);
+
+  // fleet — dark showcase
+  const fleet=E('div');fleet.style.background='var(--navy)';fleet.style.color='#fff';fleet.style.padding='52px 44px';
+  add(fleet,eyebrow('The Fleet',{light:true}),h('Golden Reel · Vertigo I · MY Alya',34,{serif:true,color:'#fff',mt:'8px',mb:'22px'}));
+  const fg=grid('repeat(3,1fr)','18px');
+  ['Golden Reel','Vertigo I','MY Alya (16 pax)'].forEach(n=>{
+    const c=E('div');c.appendChild(ph(n+' — underway',180,{dark:true}));
+    c.appendChild(h(n,18,{color:'#f0ece2',mt:'10px'}));
+    c.appendChild(tl('70%',{light:true,mt:'6px'}));fg.appendChild(c);
+  });
+  fleet.appendChild(fg);wrap.appendChild(fleet);
+
+  // experience curated (light, 3 up)
+  const exp=E('div','pad-lg');
+  add(exp,(()=>{const r=row('0',{justify:'space-between',align:'flex-end'});add(r,(()=>{const d=E('div');add(d,eyebrow('Arranged around the fishing'),h('The Experience',32,{serif:true,mt:'6px'}));return d;})(),btn('Plan your stay','ghost'));return r;})());
+  const eg=grid('repeat(3,1fr)','18px');eg.style.marginTop='22px';
+  [['Stay','Vetted lodges, personally arranged'],['Dine','“Fisherman by day, foodie by night”'],['Expeditions','The islands, beyond the rod']].forEach(([t,s])=>{
+    const c=E('div');c.appendChild(ph(t+' — lifestyle',200));c.appendChild(h(t,22,{serif:true,mt:'12px'}));c.appendChild((()=>{const d=E('div',null,s);d.style.cssText='color:var(--ink-soft);font-size:13.5px;margin-top:6px;line-height:1.5;';return d;})());eg.appendChild(c);
+  });
+  exp.appendChild(eg);wrap.appendChild(exp);
+
+  // gallery teaser
+  const gal=E('div');gal.style.padding='0 0 0 0';
+  const gg=grid('repeat(4,1fr)','4px');
+  for(let i=0;i<4;i++)gg.appendChild(ph('Catch '+(i+1),190));
+  wrap.appendChild(gg);
+
+  // inquire CTA band
+  const cta=E('div');cta.style.cssText='background:var(--accent);color:#fff;padding:54px 44px;text-align:center;';
+  add(cta,eyebrow('Whenever you’re ready',{light:true}),h("Let’s go fishing.",36,{serif:true,color:'#fff',mt:'8px'}),
+    (()=>{const p=E('div',null,"Whenever the season suits you, a short note is all we ask for to begin. We will talk through the fishing you have in mind, the boats and the days on the water, and then quietly arrange everything else around you.");p.style.cssText='max-width:580px;margin:14px auto 0;color:rgba(255,255,255,.9);font-size:15px;line-height:1.65;';return p;})(),
+    (()=>{const r=row('14px',{justify:'center'});r.style.marginTop='24px';const b1=btn("Let’s go fishing");b1.style.background='#fff';b1.style.color='var(--accent)';b1.style.borderColor='#fff';add(r,b1,btn('WhatsApp','ghost light'));return r;})());
+  wrap.appendChild(cta);
+  wrap.appendChild(footer());
+  return wrap;
+}
+function mobA(){
+  const s=E('div');
+  // nav
+  const nav=E('div');nav.style.cssText='background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:14px 16px;';
+  const lg=E('div','logo','Sportfish & Co.');lg.style.color='#f0ece2';lg.style.fontSize='17px';
+  const bg=E('div','burger');bg.style.color='#f0ece2';for(let i=0;i<3;i++)bg.appendChild(E('b'));
+  add(nav,lg,bg);s.appendChild(nav);
+  // hero
+  const hero=E('div');hero.style.cssText='position:relative;';
+  const img=ph('FULL-BLEED — marlin at golden hour',360,{dark:true});img.style.border='0';
+  const ov=E('div');ov.style.cssText='position:absolute;inset:auto 0 0 0;padding:20px 18px;background:linear-gradient(transparent,rgba(0,0,0,.55));';
+  add(ov,eyebrow('Galápagos · Est. 2004',{light:true}),h('Galápagos offshore fishing charters',28,{serif:true,color:'#fff',mt:'8px',lh:1.1}),(()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter. Experienced captains, the highest level of service, and deep local knowledge — first-timers and seasoned pros alike.");p.style.cssText='margin-top:10px;color:rgba(255,255,255,.85);font-size:13px;line-height:1.55;';return p;})(),(()=>{const b=btn("Let’s go fishing");b.style.marginTop='16px';b.style.width='100%';b.style.justifyContent='center';return b;})());
+  const box=E('div');box.style.position='relative';add(box,img,ov);hero.appendChild(box);s.appendChild(hero);
+  // proof 2x2 dark
+  const pf=E('div');pf.style.cssText='background:#16242e;display:grid;grid-template-columns:1fr 1fr;';
+  PROOF.forEach((c,i)=>{const cell=E('div','cell');cell.style.borderTop=i>1?'1.5px solid #2c3f4e':'0';cell.style.borderLeft=i%2?'1.5px solid #2c3f4e':'0';const num=E('div','num');num.innerHTML=c.num;num.style.color='#f0ece2';if(c.est)num.classList.add('estimate');const cap=E('div','cap');cap.innerHTML=c.cap;cap.style.color='#9fb1bd';add(cell,num,cap);pf.appendChild(cell);});
+  s.appendChild(pf);
+  // species stack
+  ['Striped Marlin','Yellowfin Tuna','Wahoo'].forEach((n,i)=>{
+    const c=E('div');c.appendChild(ph(n,180));const t=E('div');t.style.padding='16px 18px';add(t,eyebrow('Fishing 0'+(i+1)),h(n,26,{serif:true,mt:'6px'}),tl('80%',{mt:'8px'}),tl('60%'));c.appendChild(t);s.appendChild(c);
+  });
+  // fleet dark
+  const fl=E('div');fl.style.cssText='background:var(--navy);color:#fff;padding:26px 18px;';add(fl,eyebrow('The Fleet',{light:true}),h('Three boats',26,{serif:true,color:'#fff',mt:'6px',mb:'14px'}),ph('Vessel underway',160,{dark:true}));s.appendChild(fl);
+  // cta
+  const cta=E('div');cta.style.cssText='background:var(--accent);color:#fff;padding:34px 18px;text-align:center;';add(cta,eyebrow('Whenever you’re ready',{light:true}),h("Let’s go fishing.",26,{serif:true,color:'#fff',mt:'8px'}),(()=>{const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:16px;width:100%;justify-content:center;background:#fff;color:var(--accent);border-color:#fff;';return b;})(),(()=>{const b=btn('WhatsApp','ghost light');b.style.cssText+=';margin-top:10px;width:100%;justify-content:center;';return b;})());s.appendChild(cta);
+  return s;
+}
+
+/* =================== DIRECTION B — Editorial / airy =================== */
+function deskB(){
+  const wrap=E('div','scroll');wrap.style.background='#fbfaf6';
+  wrap.appendChild(navBar('full','light'));
+  // hairline under nav
+  const hr=E('div');hr.style.borderTop='1.5px solid var(--line)';wrap.appendChild(hr);
+  // asymmetric hero: big serif headline left, tall photo right
+  const hero=grid('1.05fr 1fr','0');hero.style.alignItems='stretch';
+  const left=E('div');left.style.cssText='padding:60px 44px;display:flex;flex-direction:column;justify-content:center;';
+  add(left,eyebrow('Owner-operated since 2004'),
+    h('Galápagos offshore fishing charters',50,{serif:true,mt:'16px',lh:1.04,w:'520px'}),
+    (()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter with Sportfish Galápagos. Our experienced captains and crews provide the highest level of service and local knowledge to make your trip the best it can be. Whether it’s your first sportfishing adventure or you’re a seasoned pro, you’ve come to the right place.");p.style.cssText='max-width:400px;margin-top:18px;color:var(--ink-soft);font-size:15px;line-height:1.65;';return p;})(),
+    (()=>{const r=row('14px');r.style.marginTop='28px';add(r,btn("Let’s go fishing"),btn('See the fishing','ghost'));return r;})());
+  const right=ph('TALL HERO — angler & striped marlin, vertical crop','100%');right.style.minHeight='460px';
+  add(hero,left,right);wrap.appendChild(hero);
+  // proof bar on white with hairlines
+  wrap.appendChild(proofBar('light'));
+  // editorial intro — centered, generous
+  const intro=E('div','center');intro.style.cssText='max-width:720px;margin:0 auto;padding:64px 30px 40px;';
+  add(intro,eyebrow('The voice'),h('We write about the fishing the way it deserves to be written about, patiently and in some detail, so that long before you arrive you already understand the water, the season and the fish you have come for.',24,{mt:'12px',lh:1.55,w:'700px'}));
+  wrap.appendChild(intro);
+  // species — clean 3-col magazine grid
+  const spWrap=E('div');spWrap.style.padding='10px 44px 56px;';
+  const spHead=row('0',{justify:'space-between',align:'flex-end'});add(spHead,(()=>{const d=E('div');add(d,eyebrow('The Fishing'),h('The fish, and the fishing',32,{serif:true,mt:'6px'}));return d;})(),btn('All species','ghost'));
+  spWrap.appendChild(spHead);
+  const sg=grid('repeat(3,1fr)','24px');sg.style.marginTop='26px';
+  [['Striped Marlin','150–250 lb · 400-class'],['Yellowfin Tuna','Bluewater bruisers'],['Wahoo','Speed on the troll']].forEach(([t,s])=>{
+    const c=E('div');c.appendChild(ph(t,240));c.appendChild(eyebrow('100% release',{}));c.lastChild.style.marginTop='14px';
+    c.appendChild(h(t,24,{serif:true,mt:'6px'}));const sub=E('div',null,s);sub.style.cssText='color:var(--ink-soft);font-size:13.5px;margin-top:4px;';c.appendChild(sub);
+    const rl=E('div',null,'Read guide →');rl.style.cssText='margin-top:12px;font-weight:600;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);';c.appendChild(rl);
+    sg.appendChild(c);
+  });
+  spWrap.appendChild(sg);wrap.appendChild(spWrap);
+  // fleet — editorial full-width photo + spec list
+  const fleet=grid('1fr 1fr','0');fleet.style.background='#f3f0e9';
+  const fimg=ph('Golden Reel underway — wide action shot','100%');fimg.style.minHeight='380px';
+  const ftxt=E('div');ftxt.style.cssText='padding:52px 44px;display:flex;flex-direction:column;justify-content:center;';
+  add(ftxt,eyebrow('The Fleet'),h('Three boats, each known by name',34,{serif:true,mt:'8px'}),
+    (()=>{const ul=E('div');ul.style.marginTop='18px';[['Golden Reel','38 ft · twin diesel · 2 anglers'],['Vertigo I','offshore · tower · live bait'],['MY Alya','sistership · up to 16 guests']].forEach(([n,d])=>{const r=E('div');r.style.cssText='display:flex;justify-content:space-between;gap:16px;border-top:1.5px solid var(--line);padding:13px 0;';const a=E('div',null,n);a.style.fontWeight='600';const b=E('div',null,d);b.style.cssText='color:var(--ink-soft);font-size:13px;';add(r,a,b);ul.appendChild(r);});return ul;})(),
+    (()=>{const b=btn('Vessel specifications','ghost');b.style.cssText+=';margin-top:22px;align-self:flex-start;';return b;})());
+  add(fleet,fimg,ftxt);wrap.appendChild(fleet);
+  // founders — portrait band (the romantic/human note)
+  const fo=E('div');fo.style.padding='60px 44px;';
+  const fh=E('div','center');add(fh,eyebrow('Our Story'),h('Peter & Al. Two decades in these waters.',32,{serif:true,mt:'8px'}));fh.style.marginBottom='28px';fo.appendChild(fh);
+  const fg=grid('repeat(2,1fr)','24px');fg.style.maxWidth='760px';fg.style.margin='0 auto';
+  [['Peter','Co-founder · Captain'],['Al','Co-founder · Captain']].forEach(([n,r])=>{
+    const c=E('div','center');const p=ph(n+' — portrait',260);c.appendChild(p);c.appendChild(h(n,22,{serif:true,mt:'12px'}));const rr=E('div',null,r);rr.style.cssText='color:var(--ink-soft);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:4px;';c.appendChild(rr);fg.appendChild(c);
+  });
+  fo.appendChild(fg);wrap.appendChild(fo);
+  // gallery clean grid
+  const gal=E('div');gal.style.padding='0 44px 56px;';add(gal,(()=>{const r=row('0',{justify:'space-between',align:'flex-end'});add(r,h('From the season',28,{serif:true}),btn('Full gallery','ghost'));r.style.marginBottom='20px';return r;})());
+  const gg=grid('repeat(4,1fr)','14px');for(let i=0;i<8;i++)gg.appendChild(ph('Catch '+(i+1),i<4?170:130));gal.appendChild(gg);wrap.appendChild(gal);
+  // experience curated row
+  const exp=E('div');exp.style.cssText='background:#f3f0e9;padding:56px 44px;';add(exp,(()=>{const d=E('div','center');add(d,eyebrow('Around the fishing'),h('Stay · Dine · Explore',32,{serif:true,mt:'6px'}));d.style.marginBottom='26px';return d;})());
+  const eg=grid('repeat(3,1fr)','20px');[['Stay','Vetted lodges, arranged for you'],['Dine','Fisherman by day, foodie by night'],['Explore','Beyond the rod']].forEach(([t,s])=>{const c=E('div');c.appendChild(ph(t,200));c.appendChild(h(t,22,{serif:true,mt:'12px'}));const d=E('div',null,s);d.style.cssText='color:var(--ink-soft);font-size:13px;margin-top:5px;';c.appendChild(d);eg.appendChild(c);});exp.appendChild(eg);wrap.appendChild(exp);
+  // inquire
+  const cta=E('div','center');cta.style.padding='60px 44px;';add(cta,eyebrow('Whenever you’re ready'),h("Let’s go fishing.",38,{serif:true,mt:'8px'}),(()=>{const p=E('div',null,"Whenever the season suits you, a short note is all we ask for to begin. We will talk through the fishing you have in mind, the boats and the days on the water, and then quietly arrange everything else around you.");p.style.cssText='max-width:580px;margin:14px auto 0;color:var(--ink-soft);font-size:15px;line-height:1.65;';return p;})(),(()=>{const r=row('14px',{justify:'center'});r.style.marginTop='26px';add(r,btn("Let’s go fishing"),btn('WhatsApp','wa'));return r;})());wrap.appendChild(cta);
+  wrap.appendChild(footer());
+  return wrap;
+}
+function mobB(){
+  const s=E('div');s.style.background='#fbfaf6';
+  const nav=E('div');nav.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1.5px solid var(--line);';
+  add(nav,E('div','logo','Sportfish & Co.'),(()=>{const b=E('div','burger');for(let i=0;i<3;i++)b.appendChild(E('b'));return b;})());s.appendChild(nav);
+  const head=E('div');head.style.padding='28px 18px 18px';add(head,eyebrow('Owner-operated since 2004'),h('Galápagos offshore fishing charters',32,{serif:true,mt:'12px',lh:1.08}),(()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter. Experienced captains, the highest level of service, and deep local knowledge — first-timers and seasoned pros alike.");p.style.cssText='margin-top:10px;color:var(--ink-soft);font-size:13px;line-height:1.55;';return p;})(),(()=>{const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:18px;width:100%;justify-content:center;';return b;})());s.appendChild(head);
+  s.appendChild(ph('TALL HERO — angler & marlin',300));
+  // proof 2x2
+  const pf=E('div');pf.style.cssText='display:grid;grid-template-columns:1fr 1fr;';PROOF.forEach((c,i)=>{const cell=E('div','cell');cell.style.borderTop='1.5px solid var(--line)';cell.style.borderLeft=i%2?'1.5px solid var(--line)':'0';const num=E('div','num');num.innerHTML=c.num;if(c.est)num.classList.add('estimate');const cap=E('div','cap');cap.innerHTML=c.cap;add(cell,num,cap);pf.appendChild(cell);});s.appendChild(pf);
+  ['Striped Marlin','Yellowfin Tuna','Wahoo'].forEach(n=>{const c=E('div');c.style.padding='20px 18px';c.style.borderTop='1.5px solid var(--line)';add(c,eyebrow('100% release'),h(n,26,{serif:true,mt:'8px'}),tl('80%',{mt:'8px'}));s.appendChild(ph(n,170));s.appendChild(c);});
+  const cta=E('div','center');cta.style.padding='34px 18px;';add(cta,eyebrow('Whenever you’re ready'),h("Let’s go fishing.",28,{serif:true,mt:'8px'}),(()=>{const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:16px;width:100%;justify-content:center;';return b;})());s.appendChild(cta);
+  return s;
+}
+
+/* =================== DIRECTION C — Expedition / split =================== */
+function deskC(){
+  const wrap=E('div','scroll');
+  wrap.appendChild(navBar('mega','sand'));
+  // split hero: photo 58 + sand inquiry panel 42
+  const hero=grid('1.4fr 1fr','0');hero.style.minHeight='480px';
+  const img=ph('HERO — Kicker Rock dawn, boat running out','100%');img.style.minHeight='480px';
+  const panel=E('div');panel.style.cssText='background:var(--sand);padding:46px 38px;display:flex;flex-direction:column;justify-content:center;';
+  add(panel,eyebrow('Plan your charter'),
+    h('Galápagos offshore fishing charters',38,{serif:true,mt:'12px',lh:1.08}),
+    (()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter with Sportfish Galápagos. Our experienced captains and crews provide the highest level of service and local knowledge to make your trip the best it can be. Whether it’s your first sportfishing adventure or you’re a seasoned pro, you’ve come to the right place.");p.style.cssText='margin-top:12px;color:var(--ink-soft);font-size:14px;line-height:1.6;';return p;})(),
+    // mini availability widget
+    (()=>{const wgt=E('div');wgt.style.cssText='background:#fff;border:1.5px solid var(--sand-deep);padding:18px;margin-top:22px;';
+      add(wgt,eyebrow('Check dates',{soft:true}));
+      const r=row('10px');r.style.marginTop='10px';
+      [['Arrive','box'],['Nights','box'],['Guests','box']].forEach(([l])=>{const f=E('div');f.style.flex='1';const lab=E('div',null,l);lab.style.cssText='font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;';const fld=E('div');fld.style.cssText='height:34px;border:1.5px solid var(--line-strong);background:var(--paper);';add(f,lab,fld);r.appendChild(f);});
+      wgt.appendChild(r);
+      const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:14px;width:100%;justify-content:center;';wgt.appendChild(b);
+      const wa=E('div',null,'…or message a captain on WhatsApp');wa.style.cssText='text-align:center;margin-top:12px;font-size:12.5px;color:var(--ok);font-weight:600;';wgt.appendChild(wa);
+      return wgt;})());
+  add(hero,img,panel);wrap.appendChild(hero);
+  // proof — sand band
+  const pf=E('div');pf.style.background='var(--sand)';const pb=proofBar('sand');pb.style.borderTop='1.5px solid var(--sand-deep)';
+  [...pb.querySelectorAll('.cell')].forEach((c,i)=>{if(i)c.style.borderLeft='1.5px solid var(--sand-deep)';});pf.appendChild(pb);wrap.appendChild(pf);
+  // "what a day looks like" timeline — expedition structure
+  const day=E('div','pad-lg');add(day,(()=>{const d=E('div','center');add(d,eyebrow('A day on the water'),h('Fisherman by day, foodie by night',32,{serif:true,mt:'6px'}));d.style.marginBottom='28px';return d;})());
+  const tg=grid('repeat(4,1fr)','16px');[['05:30','Run offshore'],['07:00','Raise marlin'],['14:00','Release & ride in'],['20:00','Chef’s table']].forEach(([t,l])=>{const c=E('div','center');c.appendChild(ph(l,140));const tt=E('div',null,t);tt.style.cssText='font-family:Caveat;font-weight:700;font-size:22px;color:var(--accent);margin-top:10px;';c.appendChild(tt);const ll=E('div',null,l);ll.style.cssText='font-size:13px;color:var(--ink-soft);margin-top:2px;';c.appendChild(ll);tg.appendChild(c);});
+  day.appendChild(tg);wrap.appendChild(day);
+  // fishing — tabbed-looking species cards with tags
+  const sp=E('div');sp.style.cssText='background:#f3f0e9;padding:52px 44px;';
+  add(sp,(()=>{const r=row('0',{justify:'space-between',align:'flex-end'});add(r,(()=>{const d=E('div');add(d,eyebrow('The Fishing'),h('Target species',32,{serif:true,mt:'6px'}));return d;})(),(()=>{const rr=row('8px');['Marlin','Tuna','Wahoo'].forEach((t,i)=>{const c=chip(t);if(!i){c.style.background='var(--ink)';c.style.color='#fff';c.style.borderColor='var(--ink)';}rr.appendChild(c);});return rr;})());return r;})());
+  const sg=grid('repeat(3,1fr)','18px');sg.style.marginTop='24px';
+  [['Striped Marlin','150–250 lb'],['Yellowfin Tuna','to 200 lb'],['Wahoo','speed troll']].forEach(([t,s])=>{const c=E('div');c.style.cssText='background:#fff;border:1.5px solid var(--line);';c.appendChild(ph(t,200));const b=E('div');b.style.padding='16px 18px';add(b,h(t,22,{serif:true}),(()=>{const r=row('6px',{wrap:true});r.style.marginTop='10px';[s,'100% release'].forEach(x=>r.appendChild(chip(x)));return r;})());c.appendChild(b);sg.appendChild(c);});
+  sp.appendChild(sg);wrap.appendChild(sp);
+  // fleet cards
+  const fleet=E('div','pad-lg');add(fleet,(()=>{const r=row('0',{justify:'space-between',align:'flex-end'});add(r,(()=>{const d=E('div');add(d,eyebrow('The Fleet'),h('Three vessels, full specs',32,{serif:true,mt:'6px'}));return d;})(),btn('Specifications','ghost'));return r;})());
+  const fg=grid('repeat(3,1fr)','18px');fg.style.marginTop='22px';['Golden Reel','Vertigo I','MY Alya'].forEach((n,i)=>{const c=E('div');c.style.cssText='border:1.5px solid var(--line);';c.appendChild(ph(n,180));const b=E('div');b.style.padding='16px 18px';add(b,h(n,20,{serif:true}),(()=>{const u=E('div');u.style.marginTop='10px';['Length','Engines','Guests'].forEach(k=>{const r=E('div');r.style.cssText='display:flex;justify-content:space-between;border-top:1.5px solid var(--line);padding:8px 0;font-size:12.5px;';const a=E('div',null,k);a.style.color='var(--ink-soft)';const v=E('div');v.style.cssText='width:54px;height:9px;background:var(--line);';add(r,a,v);u.appendChild(r);});return u;})());c.appendChild(b);fg.appendChild(c);});
+  fleet.appendChild(fg);wrap.appendChild(fleet);
+  // experience + gallery combined band
+  const exp=E('div');exp.style.cssText='background:var(--navy);color:#fff;padding:54px 44px;';
+  add(exp,(()=>{const d=E('div','center');add(d,eyebrow('Arranged for you',{light:true}),h('Lodges, dining & islands — handled.',32,{serif:true,color:'#fff',mt:'6px'}));d.style.marginBottom='26px';return d;})());
+  const eg=grid('repeat(3,1fr)','16px');[['Stay','Vetted lodges'],['Dine','Chef’s table'],['Explore','Island days']].forEach(([t,s])=>{const c=E('div');c.appendChild(ph(t,200,{dark:true}));c.appendChild(h(t,22,{serif:true,color:'#fff',mt:'12px'}));const d=E('div',null,s);d.style.cssText='color:#9fb1bd;font-size:13px;margin-top:5px;';c.appendChild(d);eg.appendChild(c);});exp.appendChild(eg);wrap.appendChild(exp);
+  // inquire band sand
+  const cta=E('div','center');cta.style.cssText='background:var(--sand);padding:56px 44px;';add(cta,eyebrow('Whenever you’re ready'),h("Let’s go fishing.",38,{serif:true,mt:'8px'}),(()=>{const p=E('div',null,"Whenever the season suits you, a short note is all we ask for to begin. We will talk through the fishing you have in mind, the boats and the days on the water, and then quietly arrange everything else around you.");p.style.cssText='max-width:580px;margin:14px auto 0;color:var(--ink-soft);font-size:15px;line-height:1.65;';return p;})(),(()=>{const r=row('14px',{justify:'center'});r.style.marginTop='24px';add(r,btn("Let’s go fishing"),btn('WhatsApp','wa'));return r;})());wrap.appendChild(cta);
+  wrap.appendChild(footer());
+  return wrap;
+}
+function mobC(){
+  const s=E('div');
+  const nav=E('div');nav.style.cssText='background:var(--sand);display:flex;align-items:center;justify-content:space-between;padding:14px 16px;';add(nav,E('div','logo','Sportfish & Co.'),(()=>{const b=E('div','burger');for(let i=0;i<3;i++)b.appendChild(E('b'));return b;})());s.appendChild(nav);
+  s.appendChild(ph('HERO — Kicker Rock dawn',260));
+  const panel=E('div');panel.style.cssText='background:var(--sand);padding:24px 18px;';add(panel,eyebrow('Plan your charter'),h('Galápagos offshore fishing charters',28,{serif:true,mt:'10px',lh:1.1}),(()=>{const p=E('div',null,"Catch some of the world’s largest fish on your private charter. Experienced captains, the highest level of service, and deep local knowledge — first-timers and seasoned pros alike.");p.style.cssText='margin-top:10px;color:var(--ink-soft);font-size:13px;line-height:1.55;';return p;})());
+  const wgt=E('div');wgt.style.cssText='background:#fff;border:1.5px solid var(--sand-deep);padding:16px;margin-top:16px;';add(wgt,eyebrow('Check dates',{soft:true}));[['Arrive'],['Nights & guests']].forEach(([l])=>{const lab=E('div',null,l);lab.style.cssText='font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:10px 0 6px;';const fld=E('div');fld.style.cssText='height:36px;border:1.5px solid var(--line-strong);background:var(--paper);';add(wgt,lab,fld);});const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:14px;width:100%;justify-content:center;';wgt.appendChild(b);panel.appendChild(wgt);s.appendChild(panel);
+  const pf=E('div');pf.style.cssText='background:var(--sand);display:grid;grid-template-columns:1fr 1fr;';PROOF.forEach((c,i)=>{const cell=E('div','cell');cell.style.borderTop='1.5px solid var(--sand-deep)';cell.style.borderLeft=i%2?'1.5px solid var(--sand-deep)':'0';const num=E('div','num');num.innerHTML=c.num;if(c.est)num.classList.add('estimate');const cap=E('div','cap');cap.innerHTML=c.cap;add(cell,num,cap);pf.appendChild(cell);});s.appendChild(pf);
+  const day=E('div','center');day.style.padding='26px 18px';add(day,eyebrow('A day on the water'),h('Fisherman by day, foodie by night',24,{serif:true,mt:'6px',mb:'14px'}),ph('Run offshore',150));s.appendChild(day);
+  const cta=E('div','center');cta.style.cssText='background:var(--navy);color:#fff;padding:34px 18px;';add(cta,eyebrow('Whenever you’re ready',{light:true}),h("Let’s go fishing.",28,{serif:true,color:'#fff',mt:'8px'}),(()=>{const b=btn("Let’s go fishing");b.style.cssText+=';margin-top:16px;width:100%;justify-content:center;';return b;})());s.appendChild(cta);
+  return s;
+}
+
+/* =================== DIRECTION A+ — Recommended blend =================== */
+const COPY={
+  full:"Catch some of the world\u2019s largest fish on your private charter with Sportfish Gal\u00e1pagos. Our experienced captains and crews provide the highest level of service and local knowledge to make your trip the best it can be. Whether it\u2019s your first sportfishing adventure or you\u2019re a seasoned pro, you\u2019ve come to the right place.",
+  short:"Catch some of the world\u2019s largest fish on your private charter. Experienced captains, the highest level of service, and deep local knowledge \u2014 first-timers and seasoned pros alike.",
+  voice:"For nearly twenty years the same small crew has fished these waters, long enough to know the islands, the seasons and the fish the way only those who are out on them every day can.",
+  species:"Striped marlin run these waters through much of the year, most of them between a hundred and fifty and two hundred and fifty pounds, with the occasional fish in the four-hundred-pound class, and every one of them returned to the water.",
+  fleet:"Golden Reel and Vertigo I fish as our own boats; the sistership MY Alya joins us for larger parties of up to sixteen, so a family or a group can travel and fish together.",
+  founders:"Two friends who came for the fishing and never quite left, and who have spent the better part of twenty years learning these islands well enough to share them properly.",
+  exp:"The lodges are partners we know and trust, chosen and arranged on your behalf, so that everything beyond the fishing is quietly taken care of without your having to think about it.",
+  close:"Whenever the season suits you, a short note is all we ask for to begin. We will talk through the fishing you have in mind, the boats and the days on the water, and then quietly arrange everything else around you."
+};
+function para(text,o){o=o||{};const p=E('div',null,text);p.style.maxWidth=o.w||'520px';p.style.marginTop=o.mt||'14px';p.style.color=o.color||'var(--ink-soft)';p.style.fontSize=(o.fs||15)+'px';p.style.lineHeight='1.65';if(o.center){p.style.marginLeft='auto';p.style.marginRight='auto';}return p;}
+
+function deskAP(){
+  const wrap=E('div','scroll');
+  // hero — cinematic full-bleed
+  const hero=E('div');hero.style.cssText='position:relative;background:var(--navy);color:#fff;';
+  hero.appendChild(navBar('overlay','dark'));
+  const img=ph('FULL-BLEED HERO \u2014 striped marlin breaking, low golden light','',{dark:true});
+  img.style.position='absolute';img.style.inset='0';img.style.border='0';img.style.alignItems='flex-end';img.style.justifyContent='flex-end';img.style.padding='16px';
+  const content=E('div');content.style.cssText='position:relative;padding:92px 56px 80px;max-width:720px;';
+  const r=row('14px');r.style.marginTop='30px';add(r,btn("Let\u2019s go fishing"),btn('The fishing','ghost light'));
+  add(content,eyebrow('Gal\u00e1pagos \u00b7 Est. 2004',{light:true}),h('Gal\u00e1pagos offshore fishing charters',54,{serif:true,color:'#fff',mt:'16px',lh:1.02,w:'620px'}),para(COPY.full,{w:'480px',color:'rgba(255,255,255,.82)'}),r);
+  const box=E('div');box.style.position='relative';add(box,img,content);hero.appendChild(box);wrap.appendChild(hero);
+  const pf=E('div');pf.style.background='#16242e';pf.appendChild(proofBar('dark'));wrap.appendChild(pf);
+
+  // airy intro — the unhurried voice
+  const intro=E('div');intro.style.cssText='padding:84px 56px;max-width:900px;margin:0 auto;text-align:center;';
+  add(intro,eyebrow('Owner-operated \u00b7 Captains Peter & Al'),h(COPY.voice,26,{mt:'18px',lh:1.5}));
+  wrap.appendChild(intro);
+
+  // feature species split (light)
+  const feat=grid('1fr 1fr','0');feat.style.minHeight='460px';feat.style.background='#f3f0e9';
+  const fimg=ph('Striped marlin \u2014 full-frame, fish on','100%');fimg.style.minHeight='460px';
+  const ftx=E('div');ftx.style.cssText='padding:64px 56px;display:flex;flex-direction:column;justify-content:center;';
+  const fr=row('8px',{wrap:true});fr.style.marginTop='18px';['150\u2013250 lb','400-lb class','100% release','Fly & conventional'].forEach(t=>fr.appendChild(chip(t)));
+  const fb=btn('Read the species guide','ghost');fb.style.marginTop='24px';fb.style.alignSelf='flex-start';
+  add(ftx,eyebrow('The Fishing \u2014 Marlin'),h('Striped marlin',40,{serif:true,mt:'10px'}),para(COPY.species,{w:'440px'}),fr,fb);
+  add(feat,fimg,ftx);wrap.appendChild(feat);
+
+  // tuna + wahoo airy duo
+  const duo=E('div');duo.style.cssText='padding:74px 56px;';
+  const dh=row('0',{justify:'space-between',align:'flex-end'});add(dh,(()=>{const d=E('div');add(d,eyebrow('Also in the spread'),h('The fish, and the fishing',34,{serif:true,mt:'6px'}));return d;})(),btn('All species','ghost'));
+  duo.appendChild(dh);
+  const dg=grid('1fr 1fr','30px');dg.style.marginTop='30px';
+  [['Yellowfin tuna','Heavy bluewater tuna show through the season, taken on bait and on the troll, and they test tackle and angler in equal measure.'],['Wahoo','Fast, sharp-toothed and unmistakable on the strike, wahoo come to trolled lures along the drop-offs and reward a quick hand.']].forEach(([t,s])=>{const c=E('div');c.appendChild(ph(t+' \u2014 full frame',280));c.appendChild(h(t,24,{serif:true,mt:'14px'}));c.appendChild(para(s,{w:'100%',mt:'8px'}));const l=E('div',null,'Read the guide \u2192');l.style.cssText='margin-top:12px;font-weight:600;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);';c.appendChild(l);dg.appendChild(c);});
+  duo.appendChild(dg);wrap.appendChild(duo);
+
+  // fleet — cinematic dark with spec lists
+  const fleet=E('div');fleet.style.cssText='background:var(--navy);color:#fff;padding:74px 56px;';
+  add(fleet,eyebrow('The Fleet',{light:true}),h('Three boats, each known by name',38,{serif:true,color:'#fff',mt:'10px',mb:'6px'}),para(COPY.fleet,{w:'660px',color:'rgba(240,236,226,.75)',mt:'8px'}));
+  const fg=grid('repeat(3,1fr)','22px');fg.style.marginTop='32px';
+  [['Golden Reel',[['Length','38 ft'],['Anglers','2\u20134'],['Tackle','Talica 50II']]],['Vertigo I',[['Setup','Tower \u00b7 live bait'],['Range','Offshore'],['Anglers','2\u20134']]],['MY Alya',[['Guests','Up to 16'],['Type','Sistership'],['Best for','Groups']]]].forEach(([n,specs])=>{const c=E('div');c.appendChild(ph(n+' \u2014 underway',190,{dark:true}));c.appendChild(h(n,20,{serif:true,color:'#f0ece2',mt:'12px'}));const u=E('div');u.style.marginTop='8px';specs.forEach(([k,v])=>{const rr=E('div');rr.style.cssText='display:flex;justify-content:space-between;border-top:1.5px solid #2c3f4e;padding:8px 0;font-size:12.5px;';const a=E('div',null,k);a.style.color='#9fb1bd';const b2=E('div',null,v);b2.style.color='#dfe6ea';add(rr,a,b2);u.appendChild(rr);});c.appendChild(u);fg.appendChild(c);});
+  fleet.appendChild(fg);wrap.appendChild(fleet);
+
+  // founders portrait band — the trust story
+  const fo=E('div');fo.style.cssText='padding:84px 56px;';
+  const foh=E('div','center');add(foh,eyebrow('Our Story'),h('Peter & Al',36,{serif:true,mt:'8px'}),para(COPY.founders,{w:'620px',center:true,mt:'12px'}));foh.style.marginBottom='34px';fo.appendChild(foh);
+  const fgr=grid('repeat(2,1fr)','30px');fgr.style.maxWidth='820px';fgr.style.margin='0 auto';
+  [['Peter','Co-founder & captain'],['Al','Co-founder & captain']].forEach(([n,r2])=>{const c=E('div','center');c.appendChild(ph(n+' \u2014 portrait, on the dock',300));c.appendChild(h(n,24,{serif:true,mt:'14px'}));const rr=E('div',null,r2);rr.style.cssText='color:var(--ink-soft);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:5px;';c.appendChild(rr);fgr.appendChild(c);});
+  fo.appendChild(fgr);wrap.appendChild(fo);
+
+  // gallery — full-frame
+  const gal=E('div');gal.style.cssText='padding:0 56px 80px;';
+  const gah=E('div','center');add(gah,eyebrow('The Gallery'),h('Years of fish, kept by species',30,{serif:true,mt:'6px'}));gah.style.margin='0 0 26px';gal.appendChild(gah);
+  const gg=grid('repeat(4,1fr)','14px');for(let i=0;i<8;i++)gg.appendChild(ph('Catch '+(i+1),i<4?200:150));gal.appendChild(gg);wrap.appendChild(gal);
+
+  // experience curated — light, roomy
+  const exp=E('div');exp.style.cssText='background:#f3f0e9;padding:80px 56px;';
+  const exh=E('div','center');exh.style.cssText='max-width:680px;margin:0 auto 32px;';add(exh,eyebrow('Arranged around the fishing'),h('Where you stay, what you eat, the islands you see',30,{serif:true,mt:'6px'}),para(COPY.exp,{w:'100%',center:true,mt:'12px'}));exp.appendChild(exh);
+  const eg=grid('repeat(3,1fr)','22px');[['Stay','Vetted lodges, personally arranged'],['Dine','Fisherman by day, foodie by night'],['Explore','The islands, beyond the rod']].forEach(([t,s])=>{const c=E('div');c.appendChild(ph(t+' \u2014 lifestyle',220));c.appendChild(h(t,22,{serif:true,mt:'14px'}));c.appendChild(para(s,{w:'100%',mt:'6px',fs:14}));eg.appendChild(c);});exp.appendChild(eg);wrap.appendChild(exp);
+
+  // closing — cinematic dark full-bleed, soft invitation
+  const cta=E('div');cta.style.cssText='position:relative;background:var(--navy);color:#fff;';
+  const cimg=ph('FULL-BLEED \u2014 dusk, the boat returning to harbour','',{dark:true});cimg.style.position='absolute';cimg.style.inset='0';cimg.style.border='0';
+  const cin=E('div','center');cin.style.cssText='position:relative;padding:100px 56px;';
+  const cr=row('14px',{justify:'center'});cr.style.marginTop='26px';const cb=btn("Let\u2019s go fishing");cb.style.background='#fff';cb.style.color='var(--navy)';cb.style.borderColor='#fff';add(cr,cb,btn('WhatsApp','ghost light'));
+  add(cin,eyebrow('Whenever you\u2019re ready',{light:true}),h("Let\u2019s go fishing.",46,{serif:true,color:'#fff',mt:'10px'}),para(COPY.close,{w:'600px',center:true,color:'rgba(255,255,255,.9)'}),cr);
+  const cbox=E('div');cbox.style.position='relative';add(cbox,cimg,cin);cta.appendChild(cbox);wrap.appendChild(cta);
+  wrap.appendChild(footer());
+  return wrap;
+}
+function mobAP(){
+  const s=E('div');
+  const nav=E('div');nav.style.cssText='background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:14px 16px;';
+  const lg=E('div','logo','Sportfish & Co.');lg.style.color='#f0ece2';lg.style.fontSize='17px';
+  const bg=E('div','burger');bg.style.color='#f0ece2';for(let i=0;i<3;i++)bg.appendChild(E('b'));
+  add(nav,lg,bg);s.appendChild(nav);
+  const hero=E('div');hero.style.position='relative';
+  const img=ph('FULL-BLEED \u2014 striped marlin, golden light',380,{dark:true});img.style.border='0';
+  const ov=E('div');ov.style.cssText='position:absolute;inset:auto 0 0 0;padding:22px 18px;background:linear-gradient(transparent,rgba(0,0,0,.6));';
+  const b=btn("Let\u2019s go fishing");b.style.marginTop='16px';b.style.width='100%';b.style.justifyContent='center';
+  add(ov,eyebrow('Gal\u00e1pagos \u00b7 Est. 2004',{light:true}),h('Gal\u00e1pagos offshore fishing charters',26,{serif:true,color:'#fff',mt:'8px',lh:1.1}),para(COPY.short,{w:'100%',mt:'10px',fs:13,color:'rgba(255,255,255,.85)'}),b);
+  const box=E('div');box.style.position='relative';add(box,img,ov);hero.appendChild(box);s.appendChild(hero);
+  const pf=E('div');pf.style.cssText='background:#16242e;display:grid;grid-template-columns:1fr 1fr;';PROOF.forEach((c,i)=>{const cell=E('div','cell');cell.style.borderTop=i>1?'1.5px solid #2c3f4e':'0';cell.style.borderLeft=i%2?'1.5px solid #2c3f4e':'0';const num=E('div','num');num.innerHTML=c.num;num.style.color='#f0ece2';if(c.est)num.classList.add('estimate');const cap=E('div','cap');cap.innerHTML=c.cap;cap.style.color='#9fb1bd';add(cell,num,cap);pf.appendChild(cell);});s.appendChild(pf);
+  const v=E('div','center');v.style.padding='34px 18px';add(v,eyebrow('Captains Peter & Al'),para(COPY.voice,{w:'100%',mt:'10px',fs:14}));s.appendChild(v);
+  [['Striped marlin','Striped marlin run much of the year, most between 150 and 250 lb, and every fish released.'],['Yellowfin tuna','Heavy bluewater tuna on bait and on the troll.'],['Wahoo','Fast and sharp on the strike along the drop-offs.']].forEach(([n,s2])=>{s.appendChild(ph(n,200));const c=E('div');c.style.padding='18px 18px 4px';add(c,eyebrow('The Fishing'),h(n,24,{serif:true,mt:'6px'}),para(s2,{w:'100%',mt:'8px',fs:14}));s.appendChild(c);});
+  const fl=E('div');fl.style.cssText='background:var(--navy);color:#fff;padding:30px 18px;';add(fl,eyebrow('The Fleet',{light:true}),h('Three boats, each known by name',24,{serif:true,color:'#fff',mt:'6px',mb:'14px'}),ph('Golden Reel underway',170,{dark:true}));s.appendChild(fl);
+  const fo=E('div','center');fo.style.padding='34px 18px';add(fo,eyebrow('Our Story'),h('Peter & Al',26,{serif:true,mt:'6px',mb:'16px'}));const g=grid('1fr 1fr','14px');['Peter','Al'].forEach(n=>{const c=E('div','center');c.appendChild(ph(n+' \u2014 portrait',170));c.appendChild(h(n,18,{serif:true,mt:'10px'}));g.appendChild(c);});fo.appendChild(g);s.appendChild(fo);
+  const cta=E('div');cta.style.position='relative';
+  const cimg=ph('FULL-BLEED \u2014 dusk harbour',300,{dark:true});cimg.style.border='0';
+  const ci=E('div','center');ci.style.cssText='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 18px;background:rgba(10,16,21,.5);';
+  const cb=btn("Let\u2019s go fishing");cb.style.cssText+=';margin-top:16px;width:100%;justify-content:center;background:#fff;color:var(--navy);border-color:#fff;';
+  add(ci,eyebrow('Whenever you\u2019re ready',{light:true}),h("Let\u2019s go fishing.",26,{serif:true,color:'#fff',mt:'8px'}),para(COPY.close,{w:'100%',mt:'10px',fs:13,color:'rgba(255,255,255,.9)'}),cb);
+  const cbx=E('div');cbx.style.position='relative';add(cbx,cimg,ci);cta.appendChild(cbx);s.appendChild(cta);
+  return s;
+}
+
+/* =================== render =================== */
+const DIRS={
+  aplus:{name:'Recommended',desk:deskAP,mob:mobAP,url:'sportfishgalapagos.com',
+     notes:['Cinematic full-bleed photography leads \u2014 the image is the page.','Editorial breathing room between the dark bands keeps it calm and legible.','Real founder & captain portraits carry the trust a referral brand runs on.','One soft call \u2014 \u201CLet\u2019s go fishing\u201D \u2014 no booking gadgets, no pressure.']},
+  a:{name:'Cinematic',desk:deskA,mob:mobA,url:'sportfishgalapagos.com',
+     notes:['Dark, full-bleed photography does the talking — boldest & most masculine.','Slim bar + “Menu” overlay keeps the hero uncluttered.','Proof bar sits in a dark strip right under the hero — proof leads.','Alternating image/text species bands = strong rhythm, very ADA-legible.']},
+  b:{name:'Editorial',desk:deskB,mob:mobB,url:'sportfishgalapagos.com',
+     notes:['Bright, airy magazine feel — timeless, romantic, lots of air.','All nav items visible at once — maximum clarity for older guests.','Asymmetric serif hero + tall portrait photo.','Founder portrait band carries the human/trust story.']},
+  c:{name:'Expedition',desk:deskC,mob:mobC,url:'sportfishgalapagos.com',
+     notes:['Split hero with a real “check dates” widget — most actionable.','Sand/earthy rugged-luxury palette; mega-menu on “The Fishing”.','“A day on the water” timeline tells the story concretely.','Spec-forward fleet cards pre-qualify serious buyers.']},
+};
+let CUR='aplus', VIEW='both';
+const stage=document.getElementById('stage');
+
+function deviceDesktop(dir){
+  const f=E('div','frame desktop');
+  const chrome=E('div','chrome');for(let i=0;i<3;i++)chrome.appendChild(E('i'));const u=E('div','url',DIRS[dir].url);chrome.appendChild(u);
+  f.appendChild(chrome);f.appendChild(DIRS[dir].desk());
+  const col=E('div');col.style.maxWidth='100%';
+  const t=E('div','col-title');add(t,E('span','dot'),document.createTextNode('Desktop · 1040'));
+  add(col,t,f);return col;
+}
+function deviceMobile(dir){
+  const f=E('div','frame mobile');
+  const sc=E('div','screen');const notch=E('div','notch');sc.appendChild(notch);sc.appendChild(DIRS[dir].mob());f.appendChild(sc);
+  const col=E('div');const t=E('div','col-title');add(t,E('span','dot'),document.createTextNode('Mobile · 380'));add(col,t,f);return col;
+}
+function sidecol(dir){
+  const c=E('div','sidecol');
+  const t=E('div','col-title');add(t,E('span','dot'),document.createTextNode('Why this works'));
+  c.appendChild(t);c.appendChild(annStack(DIRS[dir].notes));
+  return c;
+}
+function render(){
+  stage.innerHTML='';
+  if(VIEW!=='mobile') stage.appendChild(sidecol(CUR));
+  if(VIEW!=='mobile') stage.appendChild(deviceDesktop(CUR));
+  if(VIEW!=='desktop') stage.appendChild(deviceMobile(CUR));
+  window.scrollTo({top:0});
+}
+
+/* controls */
+document.getElementById('dirseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;CUR=b.dataset.dir;[...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+document.getElementById('viewseg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;VIEW=b.dataset.view;[...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));render();});
+
+/* sitemap drawer */
+const SMAP=[
+  ['Home','A confident opening — hero, proof bar, the client’s own words — then curated teasers into each section. Not a menu of menus.','was: Homepage'],
+  ['The Fishing','Marlin · Tuna · Wahoo + seasons in the expert species voice. Each species carries its own catch gallery.','was: 3 Fishing Info pages + Gallery'],
+  ['Gallery','Its own menu item — but it anchors into The Fishing (#gallery). The wall of proof, by species.','nav item → anchor'],
+  ['The Fleet','Golden Reel · Vertigo I · MY Alya with real spec sheets + gear shown in action.','was: Our Boats + Our Gear + Enhanced Expeditions'],
+  ['The Experience','Stay · Dine · Expeditions — the curated world arranged around the fishing.','was: Travel + Cuisine + Accommodations'],
+  ['Our Story','Peter & Al + captains: portraits, bios, twenty years in the islands.','was: Our Story'],
+  ['Enquire','A real page — pricing framing, FAQ, form, WhatsApp, named contact — plus a quick slide-over reachable from every page.','was: Contact'],
+];
+const sl=document.getElementById('smapList');
+SMAP.forEach(([t,d,w],i)=>{const li=E('li');const n=E('div','n',(i+1)+'');const box=E('div');const tt=E('div','t',t);const dd=E('div','d',d);const ww=E('div','was',w);add(box,tt,dd,ww);add(li,n,box);sl.appendChild(li);});
+const drawer=document.getElementById('drawer');
+document.getElementById('legendBtn').addEventListener('click',()=>drawer.classList.add('open'));
+drawer.addEventListener('click',e=>{if(e.target.hasAttribute('data-close'))drawer.classList.remove('open');});
+
+render();
+</script>
+</body>
+</html>
