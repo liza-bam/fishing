@@ -44,7 +44,7 @@ function Nav({ onEnquire, onMenu }) {
   return (
     <header className={"nav" + (solid ? " is-solid" : "")}>
       <div className="container nav__row">
-        <a className="nav__brand" href="index.html" aria-label="Sportfish Galápagos — home"><img className="nav__logo" src={LOGO_WHITE} alt="" /><span className="nav__wordmark">Sportfish Galápagos</span></a>
+        <a href="index.html" aria-label="Sportfish Galápagos — home"><img className="nav__logo" src={LOGO_WHITE} alt="Sportfish Galápagos" /></a>
         <div className="nav__spacer"></div>
         <nav className="nav__links" aria-label="Primary">
           {NAV.map((n) => <a key={n.label} className="nav__link" href={n.href}>{n.label}</a>)}
@@ -61,7 +61,7 @@ function MobileMenu({ open, onClose, onEnquire }) {
   return (
     <div className={"mobilemenu" + (open ? " is-open" : "")} aria-hidden={!open}>
       <div className="mobilemenu__top">
-        <a className="nav__brand" href="index.html" aria-label="Sportfish Galápagos — home" onClick={onClose}><img className="nav__logo" src={LOGO_WHITE} alt="" /><span className="nav__wordmark">Sportfish Galápagos</span></a>
+        <a href="index.html" aria-label="Sportfish Galápagos — home" onClick={onClose}><img className="nav__logo" src={LOGO_WHITE} alt="Sportfish Galápagos" /></a>
         <button className="iconbtn-plain" aria-label="Close menu" onClick={onClose}><Ic n="x" /></button>
       </div>
       <nav className="mobilemenu__links">
