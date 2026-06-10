@@ -81,6 +81,9 @@ body{ overflow-x:hidden; }
   linear-gradient(90deg, rgba(8,18,40,0.58) 0%, rgba(8,18,40,0.14) 46%, rgba(8,18,40,0) 72%),
   linear-gradient(0deg, rgba(8,18,40,0.66) 0%, rgba(8,18,40,0) 56%); }
 .hero__inner{ position:relative; z-index:1; padding-block:clamp(3rem,7vw,6rem) clamp(3.5rem,7vw,6rem); width:100%; }
+@media (max-width:760px){
+  .hero__inner{ padding-top:calc(var(--nav-h) + 2rem); }
+}
 .hero__title{ color:#fff; font-weight:var(--weight-medium); font-size:var(--text-display-l);
   line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); margin:.28em 0 0; max-width:16ch; }
 .hero__lead{ color:rgba(255,255,255,0.92); max-width:54ch; margin-top:var(--space-5);
