@@ -46,8 +46,9 @@ body{ overflow-x:hidden; }
 .nav__logo{ height:42px; width:auto; display:block; }
 .nav__spacer{ flex:1; }
 .nav__links{ display:flex; gap:var(--space-6); align-items:center; }
-.nav__link{ font-family:var(--font-sans); font-size:var(--text-body-sm); font-weight:var(--weight-semibold);
-  letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--text-on-dark); white-space:nowrap; }
+.nav__link{ font-family:var(--font-sans); font-size:var(--text-body-sm); font-weight:800;
+  letter-spacing:var(--tracking-wide); text-transform:uppercase; color:#fff; white-space:nowrap;
+  text-shadow:0 1px 2px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.35); }
 .nav__link:hover{ color:var(--c-surf); }
 .nav__burger{ display:none; background:none; border:none; cursor:pointer; color:var(--c-white); padding:6px; }
 
