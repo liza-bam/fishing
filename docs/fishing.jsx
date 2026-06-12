@@ -44,7 +44,7 @@ const GAL = [
 const PROOF = [
   { value: "20+", label: "Years off San Cristóbal" },
   { value: "150–250", label: "lb striped marlin — some past 400" },
-  { value: "100%", label: "Catch & release billfishery" },
+  { value: "5", label: "Vessels — up to 16 guests" },
   { value: "3", label: "Headline species" },
 ];
 

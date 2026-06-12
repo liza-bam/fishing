@@ -19,10 +19,10 @@ const NAV = [
 
 
 const PROOF = [
-{ value: "20+", label: "Years off San Cristóbal" },
-{ value: "150–250", label: "lb striped marlin — some past 400" },
-{ value: "100%", label: "Catch & release billfishery" },
-{ value: "3", label: "Vessels — up to 16 guests" }];
+{ value: "20+", suffix: "+", icon: "calendar-days", label: "Years off San Cristóbal" },
+{ value: "150–250", icon: "fish", label: "lb striped marlin — some past 400" },
+{ value: "5", icon: "ship", label: "Vessels — up to 16 guests" },
+{ value: "2004", icon: "compass", label: "Owner-operated since" }];
 
 
 /* ---------------- helpers ---------------- */
@@ -119,11 +119,19 @@ function Hero({ onEnquire }) {
    PROOF BAND
    ============================================================ */
 function Proof() {
+  useEffect(() => { drawIcons(); }, []);
   return (
-    <section className="section--tight bg-deep on-dark">
+    <section className="section--tight bg-deep on-dark proof-band">
       <div className="container">
-        <div className="proof reveal">
-          {PROOF.map((p) => <StatBlock key={p.label} value={p.value} label={p.label} onDark />)}
+        <div className="proof-grid reveal">
+          {PROOF.map((p) => (
+            <div className="proof-item" key={p.label}>
+              <div className="proof-item__icon" aria-hidden="true"><Ic n={p.icon} /></div>
+              <div className="proof-item__num">{p.value}</div>
+              <div className="proof-item__rule" aria-hidden="true"></div>
+              <div className="proof-item__label">{p.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </section>);
@@ -460,7 +468,7 @@ function Footer() {
         </div>
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Sportfish Galápagos · San Cristóbal · Ecuador</span>
-          <span>Catch &amp; release · Galápagos National Park</span>
+          <span>Galápagos National Park · Licensed sportfishing operator</span>
         </div>
       </div>
     </footer>);

@@ -109,7 +109,7 @@ function Footer() {
         </div>
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Sportfish Galápagos · San Cristóbal · Ecuador</span>
-          <span>Catch &amp; release · Galápagos National Park</span>
+          <span>Galápagos National Park · Licensed sportfishing operator</span>
         </div>
       </div>
     </footer>

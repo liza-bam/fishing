@@ -5,7 +5,7 @@ const { StatBlock } = window.BelugaGalapagosDesignSystem_fd3494;
 const YEARS = [
   { value: "20+", label: "Years off San Cristóbal" },
   { value: "2004", label: "Owner-operated since" },
-  { value: "100%", label: "Catch & release billfishery" },
+  { value: "Private", label: "Charters only" },
   { value: "6", label: "Vessels in the fleet" },
 ];
 
